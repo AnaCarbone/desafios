@@ -23,12 +23,11 @@ public class Main {
         double partialCost = 0;
         double min= Double.MAX_VALUE;
         for(int i = 0; i<6 && partialDuration<120 && index+i<duration.length; i++){
-            partialCost += cost[index]/discount[i];
+            partialCost += cost[index + i]/discount[i];
             if(index+i+1<duration.length) {
-                min = Math.min(min, partialCost + solve(cost, duration, discount, index + 1));
+                min = Math.min(min, partialCost + solve(cost, duration, discount, index + i + 1));
             } else min = partialCost;
             partialDuration += duration[index];
-            index++;
         }
         return min;
     }
