@@ -17,7 +17,7 @@ public class Main {
         
     }
     
-    public static double solve(double []cost, int[]duration, double[]discount, int index) {
+    public static double getMinCost(double []cost, int[]duration, double[]discount, int index) {
         if(index>duration.length) return 0;
         int partialDuration = 0;
         double partialCost = 0;
