@@ -12,7 +12,7 @@ public class Main {
             duration[i] = scan.nextInt();
             cost[i] = scan.nextDouble();
         }
-        double minCost = solve(cost, duration, discounts, 0);
+        double minCost = getMinCost(cost, duration, discounts, 0);
         System.out.println(minCost);
         
     }
@@ -25,7 +25,7 @@ public class Main {
         for(int i = 0; i<6 && partialDuration<120 && index+i<duration.length; i++){
             partialCost += cost[index + i]/discount[i];
             if(index+i+1<duration.length) {
-                min = Math.min(min, partialCost + solve(cost, duration, discount, index + i + 1));
+                min = Math.min(min, partialCost + getMinCost(cost, duration, discount, index + i + 1));
             } else min = partialCost;
             partialDuration += duration[index];
         }
