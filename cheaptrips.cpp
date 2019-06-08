@@ -6,8 +6,8 @@ long long dp[10001];
 long long discount[] = {1, 2, 4, 4, 4, 4};
 vector<long long> duration(10001), cost(10001);
 
-long long getMinCost(int index) {
-  if (index >= int(duration.size())) return 0;
+long long getMinCost(int index, int size) {
+  if (index >=size) return 0;
 
   if (dp[index] != -1) return dp[index];
 
@@ -15,11 +15,9 @@ long long getMinCost(int index) {
   long long partialCost = 0;
   long long partialDuration = 0;
 
-  for (int i = 0; partialDuration < 120 && i < 6 &&
-                  (index + i) < int(duration.size())
-                ; i++) {
+  for (int i = 0; partialDuration < 120 && i < 6 && (index + i) < size; i++) {
     partialCost += cost[index + i]*100/discount[i];
-    minCost = min(minCost, partialCost + getMinCost(index + i + 1));
+    minCost = min(minCost, partialCost + getMinCost(index + i + 1, size));
 
     partialDuration += duration[index + i];
   }
@@ -36,7 +34,7 @@ int main() {
   }
 
   memset(dp, -1, sizeof dp);
-  long long minCost = getMinCost(0);
+  long long minCost = getMinCost(0, n);
   double resp = (double) minCost/100;
   cout << std::fixed;
   cout << std::setprecision(2);
